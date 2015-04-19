@@ -1,4 +1,3 @@
-from echopoint.messaging import EventPublisher
 from echopoint import shortcuts
 
 import unittest
