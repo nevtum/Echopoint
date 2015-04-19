@@ -1,4 +1,4 @@
-from messaging import CallbackRegistry
+from echopoint.messaging import CallbackRegistry
 
 import unittest
 

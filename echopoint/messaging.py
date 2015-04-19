@@ -31,7 +31,6 @@ class CallbackRegistry:
         return len(self._subscriptions[topic])
 
     def publish(self, topic, *args, **kwargs):
-        self.logger.debug(topic, *args, **kwargs) # not sure how to output
         for func in self._subscriptions[topic]:
             func(*args, **kwargs)
 

@@ -1,5 +1,5 @@
-from messaging import EventPublisher
-from events import DomainEvent
+from echopoint.messaging import EventPublisher
+from echopoint.events import DomainEvent
 
 import unittest
 
@@ -31,7 +31,7 @@ class Event_publisher_tests(unittest.TestCase):
         self.assertEqual(self.aggregate_id, None)
         self.assertEqual(self.callback1_invoked, False)
         self.assertEqual(self.callback2_invoked, False)
-    
+
     def my_callback(self, event_obj):
         self.callback1_invoked = True
         self.aggregate_id = event_obj.aggregate_id
