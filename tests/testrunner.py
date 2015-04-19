@@ -1,6 +1,7 @@
 from tests.subscriptions import Subscription_tests
 from tests.messaging import Event_publisher_tests
 from tests.callbacks import Callback_tests
+from tests.shortcut_subscriptions import Decorator_tests
 
 import unittest
 import logging
