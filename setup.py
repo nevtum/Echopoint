@@ -18,6 +18,7 @@ setup(name='Echopoint',
       keywords = 'pub sub event sourcing es',
       url = 'https://github.com/nevtum/Echopoint.git',
       author = 'Neville Tummon',
+      author_email = 'nt.devs@gmail.com',
       license = 'Apache License 2.0',
       packages = ['Echopoint']
 )
