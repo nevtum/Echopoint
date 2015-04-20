@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(name='Echopoint',
-      version='0.1',
+      version='0.2.1',
       description = 'A lightweight pub-sub library.',
       long_description = readme(),
       classifiers = [

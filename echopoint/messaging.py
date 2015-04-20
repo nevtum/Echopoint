@@ -4,6 +4,7 @@ class CallbackRegistry:
     def __init__(self):
         self._subscriptions = {}
         self.logger = logging.getLogger()
+        self.executing = []
 
     def subscribe(self, topic, callback):
         self.logger.info("subcribing to %s." % topic)
@@ -31,8 +32,17 @@ class CallbackRegistry:
         return len(self._subscriptions[topic])
 
     def publish(self, topic, *args, **kwargs):
+        if topic in self.executing:
+            error = "recursive call violation, topic '%s'" % topic
+            self.logger.error(error)
+            raise RuntimeError(error)
+
+        self.executing.append(topic)
+
         for func in self._subscriptions[topic]:
             func(*args, **kwargs)
+
+        self.executing.remove(topic)
 
 class EventPublisher:
     """ A callback registry facade. """

@@ -32,9 +32,21 @@ class Event_publisher_tests(unittest.TestCase):
         self.assertEqual(self.callback1_invoked, False)
         self.assertEqual(self.callback2_invoked, False)
 
+    def test_should_not_allow_recursive_calls(self):
+        self.assertRaises(RuntimeError, expected_runtime_exception)
+
     def my_callback(self, event_obj):
         self.callback1_invoked = True
         self.aggregate_id = event_obj.aggregate_id
 
     def my_second_callback(self, event_obj):
         self.callback2_invoked = True
+
+def expected_runtime_exception():
+    publisher = EventPublisher()
+
+    def cb1(obj):
+        publisher.publish(DomainEvent(99999))
+
+    publisher.subscribe(DomainEvent, cb1)
+    publisher.publish(DomainEvent(22222))

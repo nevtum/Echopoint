@@ -5,7 +5,7 @@ _publishers = {}
 ''' decorator method '''
 def handle(EventType, channel="default"):
     def inner(f):
-        if channel not in publishers.keys():
+        if channel not in _publishers.keys():
             _publishers[channel] = EventPublisher()
         _publishers[channel].subscribe(EventType, f)
         return f
