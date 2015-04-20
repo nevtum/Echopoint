@@ -2,8 +2,6 @@ from echopoint import shortcuts
 
 import unittest
 
-handles_triggered = []
-
 class Decorator_tests(unittest.TestCase):
     def setUp(self):
         global handles_triggered
@@ -14,12 +12,23 @@ class Decorator_tests(unittest.TestCase):
         self.assertEqual('handler1' in handles_triggered, True)
         self.assertEqual('handler2' in handles_triggered, True)
         self.assertEqual('handler3' in handles_triggered, False)
+        self.assertEqual('handler4' in handles_triggered, False)
 
     def test_other_decorator_works(self):
         shortcuts.publish(CargoDelivered())
         self.assertEqual('handler1' in handles_triggered, False)
         self.assertEqual('handler2' in handles_triggered, False)
         self.assertEqual('handler3' in handles_triggered, True)
+        self.assertEqual('handler4' in handles_triggered, False)
+
+    def test_publish_specific_channel(self):
+        shortcuts.publish(CargoDelivered(), "channel2")
+        self.assertEqual('handler1' in handles_triggered, False)
+        self.assertEqual('handler2' in handles_triggered, False)
+        self.assertEqual('handler3' in handles_triggered, False)
+        self.assertEqual('handler4' in handles_triggered, True)
+
+handles_triggered = []
 
 ''' an example event part of
     a specific domain '''
@@ -42,3 +51,7 @@ def handler2(obj):
 @shortcuts.handle(CargoDelivered)
 def handler3(obj):
     handles_triggered.append('handler3')
+
+@shortcuts.handle(CargoDelivered, "channel2")
+def handler4(obj):
+    handles_triggered.append('handler4')

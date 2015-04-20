@@ -1,13 +1,15 @@
 from echopoint.messaging import EventPublisher
 
-publisher_global = EventPublisher()
+_publishers = {}
 
 ''' decorator method '''
-def handle(EventType):
+def handle(EventType, channel="default"):
     def inner(f):
-        publisher_global.subscribe(EventType, f)
+        if channel not in publishers.keys():
+            _publishers[channel] = EventPublisher()
+        _publishers[channel].subscribe(EventType, f)
         return f
     return inner
 
-def publish(EventInstance):
-    publisher_global.publish(EventInstance)
+def publish(EventInstance, channel="default"):
+    _publishers[channel].publish(EventInstance)
