@@ -20,5 +20,5 @@ setup(name='Echopoint',
       author = 'Neville Tummon',
       author_email = 'nt.devs@gmail.com',
       license = 'Apache License 2.0',
-      packages = ['Echopoint']
+      packages = ['echopoint']
 )
