@@ -1,4 +1,4 @@
-from echopoint.messaging import EventPublisher
+from .messaging import EventPublisher
 
 _publishers = {}
 
